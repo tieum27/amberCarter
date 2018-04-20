@@ -11,11 +11,24 @@
 
 <title>WJC William James Carter</title>
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109518339-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-109518339-1');
+</script>
+
+
 <script language="javascript" src="banner/inc/jquery-1.3.2.js"></script>
 <script language="javascript" src="banner/inc/jquery.pngFix.js"></script>
 <script language="javascript" src="banner/inc/jquery.backgroundPosition.js"></script>
 <script language="javascript" src="banner/inc/jquery.easing.compatibility.js"></script>
 <script language="javascript" type="text/javascript">
+
+
 
 /********************************************************************************|
  # This copyright notice must be kept untouched in the stylesheet at all times.  |
@@ -23,9 +36,9 @@
  # is available at http://www.encodez.com/                                       |
  # Copyright (c) 2009 Encodez Systems. All rights reserved.                      |
  # ------------------------------------------------------------------------------|
- # This script and the associated (x)html may be modified in any                 | 
+ # This script and the associated (x)html may be modified in any                 |
  # way to fit your requirements.                                                 |
- #                                                                               | 
+ #                                                                               |
  # DYNAMIC MULTI TRANSITION BANNER                                               |                                                                              |
  # Author       : MUNEER SAHEED                                                  |
  # Released on  : 16 June 2009                                                   |
@@ -42,12 +55,12 @@
  *
  * width of the banner
  * If changing this varibale, please do not forget to change
- * the CSS 
+ * the CSS
  * I    "#bannerTD"
  * II   "#bannerContainer"
  * III  "#bannerFooter"
  * IV   "#bannerFooterNav"
- */ 
+ */
 var encBannerWidth = 900;
 
 /*
@@ -61,7 +74,7 @@ var encTransitionType = "slide";
 
 /*
  * Describes the number of background images and thumbnail images
- * are there. 
+ * are there.
  * Recomended values are 3 or 4
  * Can be 1 to max possible according to the width of banner.
  */
@@ -101,7 +114,7 @@ var encEnableFooter = true;
 
 /*
  * Disable all text from the footer
- * except the thumbnail image. This will make possible to 
+ * except the thumbnail image. This will make possible to
  * maximise the number of thumbnail image using variable "encNumOfImages".
  */
 var encDisableTextsAll = false;
@@ -173,7 +186,7 @@ var encThumbs = new Array(encNumOfImages);
  * The "encLoadBanner()" is the main function to start the banner.
  * It can be placed inside "$(document).ready(function()" jquery document ready
  * funciton or inside the "onload=function()" javascript document onload function.
- * both will work. The advantage of placing inside "onload=function()" is, 
+ * both will work. The advantage of placing inside "onload=function()" is,
  * the banner image will be loaded after the complete website rendered in to browser.
  */
 onload=function()
@@ -186,19 +199,19 @@ encLoadBanner = function()
     encImg = encPreloadImages(encImageArray, encNumOfImages);
     if(encEnableFooter)
     {
-        encThumbs = encPreloadImages(encThumbNailImageArray, encNumOfImages);        
+        encThumbs = encPreloadImages(encThumbNailImageArray, encNumOfImages);
     }
-    
+
     $("#bannerBody").html("");
-    
+
     $("div#bannerContainerCover").css("background-image", "url(" + encImg[encImg.length-1].src + ")");
     encTransformBanner(0);
-    
+
     if(encEnableFooter)
     {
         var tmpCellWidth = Math.floor(encBannerWidth/encNumOfImages);
         var tmpLastCellWidth = tmpCellWidth + (encBannerWidth%encNumOfImages);
-        
+
         var footerContents = "<table cellpadding='0' cellspacing='0' width='" + encBannerWidth + "' align='center'><tr>";
         for(i=0; i<encNumOfImages; i++)
         {
@@ -206,7 +219,7 @@ encLoadBanner = function()
                 footerContents += "<td class='footerCell' width='" + tmpCellWidth + "'>";
             else
                 footerContents += "<td class='footerCell' width='" + tmpLastCellWidth + "'>";
-                
+
             footerContents += "<div class='imgBgDiv_i'><div id='thumbDiv_" + i + "' class='imgDiv' style='background:url(" + encThumbs[i].src + ") 0px 0px no-repeat;'></div></div>";
             footerContents += "<ul id='footerContents_" + i + "'>";
             footerContents += "<li class='footerTitle'></li>";
@@ -221,8 +234,8 @@ encLoadBanner = function()
         showFooter();
         $(".imgDiv").fadeTo("fast", 0.75);
     }
-    
-    
+
+
     if(! encDisableTextsAll && encEnableFooter)
     {
         for(i=0; i<encNumOfImages; i++)
@@ -233,9 +246,9 @@ encLoadBanner = function()
             {
                 $(".footerLink:eq(" + i + ")").html("<div class='bttnMore'><a href='" + encBannerTexts[i][2] + "'>&nbsp;</a></div>");
             }
-        } 
+        }
     }
-    
+
     if(encEnableThumbImageLink && encEnableFooter)
     {
         for(i=0; i<encNumOfImages; i++)
@@ -244,7 +257,7 @@ encLoadBanner = function()
             $("#thumbDiv_" + i).attr("onclick", "window.location.href='" + link + "'")
         }
     }
-    
+
     if(encEnableFooter)
     {
         a=0;
@@ -268,10 +281,10 @@ encLoadBanner = function()
            encBusy = false;
            $(document).pngFix();
         });
-        
-        $(document).pngFix(); 
+
+        $(document).pngFix();
     }
-    
+
     if(encAutoRotateBanner)
     {
         var tmpBannerTimer = setTimeout("encAutorotate(0)", encAutoRotateTimeout);
@@ -288,22 +301,22 @@ encTransformBanner = function(ids)
     encCurrentBanner = ids;
     var currentBg = $("div#bannerContainerCover").css("background-image");
     $("div#bannerContainer").css("background-image", currentBg);
-    
+
     var cssObj = {"opacity": "0.1", "background-repeat": "no-repeat", "background-image": "url(" + encImg [ids].src + ")"}
     $("div#bannerContainerCover").css(cssObj);
-    
+
     if(encTransitionType == "slide")
-    {     
-        $("div#bannerContainerCover").css("background-position", "-50px 0");                
+    {
+        $("div#bannerContainerCover").css("background-position", "-50px 0");
         $("div#bannerContainerCover").stop().animate({backgroundPosition:"(0 0)", opacity:"1"}, {duration:600});
-    }    
+    }
     else if(encTransitionType == "slideDown")
-    {      
-        $("div#bannerContainerCover").css("background-position", "0 -50px");                
+    {
+        $("div#bannerContainerCover").css("background-position", "0 -50px");
         $("div#bannerContainerCover").stop().animate({backgroundPosition:"(0 0)", opacity:"1"}, {duration:600});
     }
     else
-    {      
+    {
         $("div#bannerContainerCover").stop().animate({opacity:"1"}, {duration:1000});
     }
 }
@@ -315,17 +328,17 @@ encAutorotate = function(bannerID)
         bannerID = encCurrentBanner;
         encCurrentBanner = -1;
     }
-    
+
     if(!encBusy)
     {
         if(bannerID < (encNumOfImages-1) && bannerID >= 0)
             bannerID++;
         else
             bannerID =0;
-            
+
         encTransformBanner(bannerID);
     }
-    
+
     var tmpBannerTimer = setTimeout("encAutorotate(" + bannerID + ")", encAutoRotateTimeout);
 }
 
@@ -352,12 +365,12 @@ body {text-align:center; margin:0;}
 #bannerTD #bannerContainerCover { width:900px; height:325px; text-align:center;}
 #bannerTD #bannerBody { height:245px; text-align:center;}
 
-#bannerTD #bannerFooter {     
-    background:#000000; height:80px; 
-    display:none; 
+#bannerTD #bannerFooter {
+    background:#000000; height:80px;
+    display:none;
     width:900px;
 }
-#bannerTD #bannerFooterNav { 
+#bannerTD #bannerFooterNav {
     position:absolute;
     top:335px;margin-top:0;
     left:50%;margin-left:-450px;
@@ -410,11 +423,11 @@ body {text-align:center; margin:0;}
                 <tr>
                 	<td>
                     <table align="center">
-                     <tr>	
+                     <tr>
                            <td width="75" align="left" id="logoPart">
                            <a href="index.html"><img src="img/logo_ini_rnd.gif" border="0" alt="logo" align="absmiddle" /></a>
                            </td>
-                           <td width="100"></td>                     
+                           <td width="100"></td>
                            <td width="555">
                                 <nav>
                                     <ul class="fancyNav">
@@ -437,7 +450,7 @@ body {text-align:center; margin:0;}
                         <div id="bannerContainerCover">
                             <div id="bannerBody"><img src="banner/img/gen/loading_animation.gif" border="0" alt="Loading..." />
                             </div>
-                            <div id="bannerFooter">    
+                            <div id="bannerFooter">
                             </div>
                         </div>
                     </div>
